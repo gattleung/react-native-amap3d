@@ -19,10 +19,16 @@ export default class Component<P> extends PureComponent<P> {
    * Call native method
    */
   call(name: string, params?: any[]) {
-    const handle = findNodeHandle(this);
-    if (handle) {
-      const command = UIManager.getViewManagerConfig(this.nativeComponent).Commands[name];
-      UIManager.dispatchViewManagerCommand(handle, command, params);
+    try {
+      if (this.updater.isMounted(this)) {
+        const handle = findNodeHandle(this);
+        if (handle) {
+          const command = UIManager.getViewManagerConfig(this.nativeComponent).Commands[name];
+          UIManager.dispatchViewManagerCommand(handle, command, params);
+        }
+      }
+    } catch (e) {
+      console.warn(e);
     }
   }
 
