@@ -10,7 +10,7 @@
     "maps",
     "mapview"
   ],
-  "main": "lib/js",
+  "main": "src",
   "files": [
     "lib/js",
     "lib/android/src",
